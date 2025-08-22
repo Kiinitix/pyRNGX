@@ -1,5 +1,32 @@
 # pyRNGX
-A high-performance simulation framework for Python that bridges HPC and everyday utilities. It provides modular components for distributed execution, parallel simulations, and dataflow orchestration, powered by Python with C++/Rust backends for speed.
+
+pyRNGX is a high performance simulation framework designed to model and execute complex workloads on distributed systems. It provides a lightweight execution engine with stream-based task scheduling, adaptive resource management, and support for multi-language integration. The framework is optimized for scenarios where speed, scalability, and fine-grained control over execution patterns are essential.
+
+## Overview
+
+At its core, pyRNGX decomposes workloads into independent streams of execution. These streams are managed by a scheduling layer that dynamically assigns them to compute resources. The system supports heterogeneous execution environments, allowing developers to implement simulation logic in Python for flexibility, C++ for raw performance, and Rust for safety and concurrency guarantees.  
+
+The architecture is modular. A stream manager directs tasks into substreams, an execution layer manages memory and threading, and an adaptive orchestrator monitors performance metrics to reallocate resources in real time. Data movement is handled through a high-speed buffer system that minimizes latency and avoids unnecessary copying between processes. This approach creates a system capable of scaling across multi-core CPUs, distributed clusters, or even hybrid HPC cloud setups.
+
+## Core Technical Details
+
+pyRNGX is designed around the idea of stateless execution. Each substream is executed independently, with global coordination handled by the orchestration layer only when absolutely necessary. This eliminates the overhead of tightly coupled orchestration and enables linear scaling in many workloads.
+
+The runtime engine uses lock-free queues and SIMD enabled operators for maximum throughput on modern CPUs. Memory management is cache-aware, reducing stalls from non-local access. For distributed execution, the system leverages MPI and gRPC style communication to provide both low-level speed and high-level flexibility. Developers can extend the core with plugins written in Rust or C++, which are loaded at runtime and integrated into the task execution flow without requiring recompilation.
+
+The framework also integrates a monitoring layer. Metrics such as task completion time, queue backlog, and CPU utilization are continuously measured, and this feedback drives adaptive scheduling. The goal is to keep resources saturated while avoiding bottlenecks in communication or memory transfer.
+
+## Utility
+
+pyRNGX is designed for problems that require massive computational throughput and flexible execution models. Scientific simulations, agent-based modeling, and Monte Carlo methods can all be accelerated using its parallel execution capabilities. Financial modeling and risk simulations benefit from its ability to handle millions of independent trials across distributed clusters. In high performance computing research, the framework provides a testbed for experimenting with new scheduling algorithms or hybrid execution strategies.
+
+Because it supports multiple languages, it is also well suited for mixed workloads where part of the logic is written in Python for rapid prototyping and another part in C++ or Rust for production-grade performance. This makes pyRNGX a versatile choice for both research and real-world applications.
+
+## Problems It Can Solve
+
+pyRNGX can simulate and accelerate large scale scientific experiments such as climate models, physics-based simulations, or epidemiological spread analysis. It can be applied to real-time systems like trading infrastructure, where microsecond-level latency matters. It is also a natural fit for enterprise-scale data processing pipelines that require both elasticity and deterministic execution guarantees.
+
+The framework aims to make HPC simulation accessible without compromising on performance, bridging the gap between academic research prototypes and industrial grade execution engines.
 
 ### Architecture Diagram
 <img width="1297" height="740" alt="image" src="https://github.com/user-attachments/assets/d2bd96ee-0881-4936-a21a-3d4a6889a02e" />
