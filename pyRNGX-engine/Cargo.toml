@@ -1,0 +1,18 @@
+[workspace]
+members = []
+resolver = "2"
+
+[package]
+name = "fastflow-executor"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[lib]
+name = "fastflow_core"
+path = "core/lib.rs"
+
+[[bin]]
+name = "wordcount_example"
+path = "examples/streaming/wordcount.rs"

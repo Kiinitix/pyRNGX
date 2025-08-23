@@ -1,0 +1,13 @@
+{
+  "title": "FastFlow Executor",
+  "version": 1,
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Tasks Completed",
+      "targets": [{ "expr": "fastflow_tasks_completed" }]
+    }
+  ],
+  "timezone": "browser",
+  "schemaVersion": 30
+}

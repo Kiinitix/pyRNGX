@@ -1,0 +1,12 @@
+executor:
+  workers: 4
+  queue: "inmemory"
+
+monitoring:
+  prometheus:
+    enabled: true
+    port: 9090
+
+storage:
+  s3:
+    bucket: "my-bucket"

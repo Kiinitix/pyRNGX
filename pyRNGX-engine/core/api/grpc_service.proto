@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package fastflow.api;
+
+service ExecutorService {
+  rpc Submit(Job) returns (SubmitReply);
+  rpc Health(HealthRequest) returns (HealthReply);
+}
+
+message Job {
+  string id = 1;
+  string payload = 2; // opaque, base64 or JSON
+}
+
+message SubmitReply {
+  bool accepted = 1;
+  string message = 2;
+}
+
+message HealthRequest {}
+message HealthReply {
+  string status = 1; // "ok"
+  uint64 uptime_seconds = 2;
+}
